@@ -19,4 +19,14 @@ module.exports = function(app){
     });
   });
 
-}
+  app.delete("/api/transactions/:id", function(req, res){
+    db.Transaction.destroy({
+      where:{
+        id:req.params.id
+      }
+    }).then(function(dbTransaction){
+      res.json(dbTransaction);
+    });
+  });
+
+};
