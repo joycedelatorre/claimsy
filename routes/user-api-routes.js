@@ -1,19 +1,10 @@
-// var db = require ("../models");
-
-// module.exports = function(app){
-// 	app.get("/api/transactions", function(req, res){
-// 		db.
-// 	})
-// }
-
-
 var db = require("../models");
 
 module.exports = function(app){
 	app.post("/api/users/authenticate", function(req, res){
 		db.User.findOne({
 			where:{
-				username: req.body.username,
+				username:req.body.username,
 				password:req.body.password
 			}
 		}).then(function(dbUser){
