@@ -6,7 +6,7 @@ module.exports = function(app){
     var userId = req.params.id;
     db.Transaction.findAll({
       where:{
-        id: userId
+        UserId: userId
       }
     }).then(function(dbTransaction){
       res.json(dbTransaction);

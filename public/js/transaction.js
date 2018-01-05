@@ -12,8 +12,6 @@ $(document).ready(function(){
       for(var i =0; i < data.length; i++){
         rowsToAdd.push(data[i]);
         //console.log(data[i]);
-        //var trans_data = $("<tr>")
-        
       }
       renderTransacList(rowsToAdd);
     })
