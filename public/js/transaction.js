@@ -11,6 +11,9 @@ $(document).ready(function(){
       var rowsToAdd =[];
       for(var i =0; i < data.length; i++){
         rowsToAdd.push(data[i]);
+        //console.log(data[i]);
+        //var trans_data = $("<tr>")
+        
       }
       renderTransacList(rowsToAdd);
     })
@@ -21,13 +24,12 @@ $(document).ready(function(){
     // if(rows.length){
       //console.log(rows);
         //$(".data-row").append(rows[0].description);
-        for(var i=0; i<rows.length; i++){
-          $(".data-prov").append(rows[i].provider);
-          $(".data-desc").append(rows[i].description);
-          $(".data-amt").append(rows[i].amount);
-          $(".data-stat").append(rows[i].status);
-          $(".data-date").append(rows[i].createdAt);
-        }
+    for(var i=0; i<rows.length; i++){
+      $(".table-striped").append("<tr><td>" + rows[i].provider +
+       "</td><td>"+ rows[i].description + "</td><td>"+ rows[i].amount+
+       "</td><td>"+ rows[i].status +"</td><td>"+ rows[i].createdAt+"</td></tr>"
+      );
+    }
     // }
     // else {
       //renderEmpty();
