@@ -1,10 +1,18 @@
 module.exports = function(sequelize, DataTypes){
   	var Transaction = sequelize.define("Transaction", {
+  		provider:{
+  			type:DataTypes.STRING,
+  			allowNull:false,
+  		},
+		description:{
+			type:DataTypes.STRING,
+			allowNull:false,
+		},
 		amount:{
 			type:DataTypes.INTEGER,
 			allowNull:false,
 		},
-		description:{
+		status:{
 			type:DataTypes.STRING,
 			allowNull:false,
 		}

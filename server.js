@@ -36,53 +36,57 @@ app.use(express.static("public"));
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
-	db.Provider.create({
-		name:"Aetna",
-	});
-	db.Provider.create({
-		name:"Medicare",
-	});
-	db.Provider.create({
-		name:"Kaiser",
-	});
+	
 	db.User.create({
 		firstName: "Joyce",
 		lastName: "Delt",
 		deductible:1000,
 		username:"jdelt@gmail.com",
-		password:"jdelt",
-		ProviderId:3
+		password:"jdelt"
 	});
 	db.User.create({
 		firstName: "Patrick",
 		lastName: "Delt",
 		deductible:2000,
 		username:"pdelt@gmail.com",
-		password:"pdelt",
-		ProviderId:2
+		password:"pdelt"
 	});
 	db.User.create({
 		firstName: "Carla",
 		lastName: "Delt",
 		deductible:3000,
 		username:"cdelt@gmail.com",
-		password:"cdelt",
-		ProviderId:1
+		password:"cdelt"
 	});
 
 	db.Transaction.create({
-		amount: 60,
+		provider:"Aetna",
 		description: "follow-up checkup",
+		amount: 60,
+		status:"met",
 		UserId:1
 	});
+
 	db.Transaction.create({
-		amount: 300,
+		provider:"Aetna",
+		description: "follow-up checkup",
+		amount: 100,
+		status:"met",
+		UserId:1
+	});
+
+	db.Transaction.create({
+		provider:"Medicare",
 		description: "immunization",
+		amount: 300,
+		status:"not met",
 		UserId:2
 	});
 	db.Transaction.create({
-		amount: 1000,
+		provider:"Kaiserpermanente",
 		description: "cataract surgery",
+		amount: 1000,
+		status:"not met",
 		UserId:3
 	});
 	
