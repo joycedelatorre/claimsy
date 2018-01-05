@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  //$(document).on("click","#listTransac", getTransac);
 
-  //function getTransac(event){
+
+//--------------------- READ TRANSACTION DATA
   $("#listTransac").on("click", function(event){ //to get all the transaction data from DB
     event.preventDefault();
     //console.log("testing");
@@ -29,9 +29,7 @@ $(document).ready(function(){
 
 });
 
-
-
-function GetQueryStringParams(sParam){
+function GetQueryStringParams(sParam){ // this is to read the url for userId
   var sPageURL = window.location.search.substring(1);
   var sURLVariables = sPageURL.split('&');
   for (var i = 0; i < sURLVariables.length; i++)
@@ -43,4 +41,5 @@ function GetQueryStringParams(sParam){
       }
     }
 }
+
 
