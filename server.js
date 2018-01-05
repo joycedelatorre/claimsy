@@ -31,6 +31,7 @@ app.use(express.static("public"));
 // require("./routes/post-api-routes.js")(app);
    require("./routes/transaction-api-routes.js")(app);
    require("./routes/html-routes.js")(app);
+   require("./routes/user-api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
@@ -48,19 +49,25 @@ db.sequelize.sync({ force: true }).then(function() {
 		firstName: "Joyce",
 		lastName: "Delt",
 		deductible:1000,
-		ProviderId:1
+		username:"jdelt@gmail.com",
+		password:"jdelt",
+		ProviderId:3
 	});
 	db.User.create({
 		firstName: "Patrick",
 		lastName: "Delt",
-		deductible:1000,
+		deductible:2000,
+		username:"pdelt@gmail.com",
+		password:"pdelt",
 		ProviderId:2
 	});
 	db.User.create({
 		firstName: "Carla",
 		lastName: "Delt",
-		deductible:1000,
-		ProviderId:3
+		deductible:3000,
+		username:"cdelt@gmail.com",
+		password:"cdelt",
+		ProviderId:1
 	});
 
 	db.Transaction.create({
