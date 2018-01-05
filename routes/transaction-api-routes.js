@@ -2,7 +2,8 @@ var db = require("../models");
 
 module.exports = function(app){
 
-  app.get("/api/transactions/:id", function(req, res){ //list all transaction
+//-------- list all transactions
+  app.get("/api/transactions/:id", function(req, res){
     var userId = req.params.id;
     db.Transaction.findAll({
       where:{
@@ -13,12 +14,14 @@ module.exports = function(app){
     });
   });
 
-  app.post("/api/new", function(req, res) { //create new transaction
+//--------- create new transactions
+  app.post("/api/new", function(req, res) {
     db.Transaction.create(req.body).then(function(dbTransaction) { 
       res.json(dbTransaction);
     });
   });
 
+//---------- delete
   app.delete("/api/transactions/:id", function(req, res){
     db.Transaction.destroy({
       where:{
@@ -27,6 +30,19 @@ module.exports = function(app){
     }).then(function(dbTransaction){
       res.json(dbTransaction);
     });
+  });
+
+//----------- edit/ update
+   app.put("/api/transactions", function(req, res) {
+    db.Transaction.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(dbTransaction) {
+        res.json(dbTransaction);
+      });
   });
 
 };
