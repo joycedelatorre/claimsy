@@ -2,9 +2,9 @@ $(document).ready(function(){
   //$(document).on("click","#listTransac", getTransac);
 
   //function getTransac(event){
-  $("#listTransac").on("click", function(event){
+  $("#listTransac").on("click", function(event){ //to get all the transaction data from DB
     event.preventDefault();
-    //console.log("whatever doesnt matter semicolon ah");
+    //console.log("testing");
     var userId = GetQueryStringParams("userId");
     $.get("/api/transactions/"+userId, function(data){
       //console.log(data[0]);
@@ -17,22 +17,14 @@ $(document).ready(function(){
     })
   });
 
-  function renderTransacList(rows){
+  function renderTransacList(rows){ //this will render all the transactions of a user
     //console.log(rows[0]);
-    // if(rows.length){
-      //console.log(rows);
-        //$(".data-row").append(rows[0].description);
     for(var i=0; i<rows.length; i++){
       $(".table-striped").append("<tr><td>" + rows[i].provider +
        "</td><td>"+ rows[i].description + "</td><td>"+ rows[i].amount+
        "</td><td>"+ rows[i].status +"</td><td>"+ rows[i].createdAt+"</td></tr>"
       );
     }
-    // }
-    // else {
-      //renderEmpty();
-      // console.log("empty");
-    // }
   }
 
 });
