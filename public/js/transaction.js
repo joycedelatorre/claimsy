@@ -1,5 +1,12 @@
 var userId = GetQueryStringParams("userId");
 
+  function getFirstNameLastName(){
+    $.get("/api/users/"+userId, function(data){
+      console.log(data);
+      $("#transacUname").html(data.firstName + " " + data.lastName);
+    });
+  }
+
   function getTransactions(){
     $.get("/api/transactions/"+userId, function(data){
       //console.log(data[0]);
@@ -62,11 +69,13 @@ var userId = GetQueryStringParams("userId");
 
   function addEditEvent(){
     $(".table-striped").on("click", ".edit", function(){
-
+      var rowId = $(this).parent("td").parent("tr").attr('id');
     });
   }
 
 $(document).ready(function(){
+
+  getFirstNameLastName();
 
 //--------------------- READ TRANSACTION DATA
   $("#listTransac").on("click", function(event){ //to get all the transaction data from DB
@@ -89,14 +98,16 @@ $(document).ready(function(){
     );
   });
 
+
+//--------------------------- UPDATE TRANSACTION DATA
+
+
 //---------------------------- user logout
 
   $("#LogOut").on("click", function(event){
     event.preventDefault();
     window.location = "/";
   })
-
-//--------------------------- UPDATE TRANSACTION DATA
 
 });
 
