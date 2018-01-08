@@ -29,11 +29,12 @@ var userId = GetQueryStringParams("userId");
       counter += 1;
       $(".table-striped").append("<tr class='lTransac' id="+rows[i].id+"><td>" + rows[i].provider +
        "</td><td>"+rows[i].description+"</td><td>"+ rows[i].amount+
-       "</td><td><input disabled type=text value='"+ rows[i].status +"'/></td><td>"+ rows[i].createdAt+
+       "</td><td class='edit_td'><input disabled class='edit_Input' type=text value='"+ rows[i].status +"'/></td><td>"+ rows[i].createdAt+
        "</td><td> <button class='btn btn-success edit'> Edit </button></td> <td> <button class='btn btn-success delete'>Delete</button> </td></tr>"
       );
     }
     addDeleteEvent();
+    addEditEvent();
   }
 
 //ref: *** http://www.jquerybyexample.net/2012/05/how-to-get-querystring-value-using.html
@@ -58,6 +59,8 @@ var userId = GetQueryStringParams("userId");
       .then(getTransactions);
   }
 
+
+//ref:https://codepedia.info/remove-table-row-tr-in-jquery/
 //--------------------------- DELETE TRANSACTION DATA
   function addDeleteEvent() {
     $(".table-striped").on("click", ".delete", function() {
@@ -73,9 +76,37 @@ var userId = GetQueryStringParams("userId");
   }
 
 
+//ref: https://stackoverflow.com/questions/22745903/enable-disable-controls-in-a-table-row
   function addEditEvent(){
     $(".table-striped").on("click", ".edit", function(){
-      var rowId = $(this).parent("td").parent("tr").attr('id');
+      $(this).closest('tr').find('.edit_Input').prop('disabled', false);
+      $(this).closest('tr').find('.edit').html('Save');
+      $(this).closest('tr').find('.edit').addClass('save');
+      $(this).closest('tr').find('.edit').removeClass('edit');
+      $(this).closest('tr').find('.delete').html('Cancel');
+      $(this).closest('tr').find('.delete').addClass('cancel');
+      $(this).closest('tr').find('.delete').removeClass('delete');
+    });
+    saveUpdate();
+    cancelUpdate();
+  }
+
+  function saveUpdate(){
+    $(".table-striped").on("click", ".save", function(){
+
+    });
+  }
+
+  function cancelUpdate(){
+    $(".table-striped").on("click", ".cancel", function(){
+      $(this).closest('tr').find('.edit_Input').prop('disabled', true);
+      $(this).closest('tr').find('.cancel').html('Delete');
+      $(this).closest('tr').find('.cancel').addClass('delete');
+      $(this).closest('tr').find('.cancel').removeClass('cancel');
+
+      $(this).closest('tr').find('.save').html('Edit');
+      $(this).closest('tr').find('.save').addClass('edit');
+      $(this).closest('tr').find('.save').removeClass('save');
     });
   }
 
