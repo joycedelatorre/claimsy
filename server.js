@@ -63,7 +63,7 @@ db.sequelize.sync({ force: true }).then(function() {
 		provider:"Aetna",
 		description: "follow-up checkup",
 		amount: 60,
-		status:"met",
+		status:"paid",
 		UserId:1
 	});
 
@@ -71,7 +71,7 @@ db.sequelize.sync({ force: true }).then(function() {
 		provider:"Aetna",
 		description: "follow-up checkup",
 		amount: 100,
-		status:"met",
+		status:"paid",
 		UserId:1
 	});
 
@@ -79,14 +79,14 @@ db.sequelize.sync({ force: true }).then(function() {
 		provider:"Medicare",
 		description: "immunization",
 		amount: 300,
-		status:"not met",
+		status:"not paid",
 		UserId:2
 	});
 	db.Transaction.create({
 		provider:"Kaiserpermanente",
 		description: "cataract surgery",
 		amount: 1000,
-		status:"not met",
+		status:"not paid",
 		UserId:3
 	});
 	
