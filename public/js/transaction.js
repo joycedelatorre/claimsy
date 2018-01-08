@@ -79,6 +79,7 @@ var userId = GetQueryStringParams("userId");
 //ref: https://stackoverflow.com/questions/22745903/enable-disable-controls-in-a-table-row
   function addEditEvent(){
     $(".table-striped").on("click", ".edit", function(){
+      event.preventDefault();
       $(this).closest('tr').find('.edit_Input').prop('disabled', false);
       $(this).closest('tr').find('.edit').html('Save');
       $(this).closest('tr').find('.edit').addClass('save');
@@ -87,17 +88,31 @@ var userId = GetQueryStringParams("userId");
       $(this).closest('tr').find('.delete').addClass('cancel');
       $(this).closest('tr').find('.delete').removeClass('delete');
     });
-    saveUpdate();
-    cancelUpdate();
-  }
 
-  function saveUpdate(){
+
+    // saveUpdate();
     $(".table-striped").on("click", ".save", function(){
+      var saveInstanceId = $(this).parent("td").parent("tr").attr('id');
+      console.log(saveInstanceId);
+      console.log($(".edit_Input").val());
+      $.ajax({
+        method:"PUT",
+        url:"/api/transactions",
+        data:
+        {
+        // provider:$("#providerInput").val().trim(),
+        // description:$("#descriptionInput").val().trim(),
+        // amount:$("#amountInput").val().trim(),
+        id:saveInstanceId,
+        status:$(".edit_Input").val().trim()
+        // UserId:userId
+      }
 
+
+      }).done();
     });
-  }
-
-  function cancelUpdate(){
+    
+    // cancelUpdate();
     $(".table-striped").on("click", ".cancel", function(){
       $(this).closest('tr').find('.edit_Input').prop('disabled', true);
       $(this).closest('tr').find('.cancel').html('Delete');
@@ -109,6 +124,13 @@ var userId = GetQueryStringParams("userId");
       $(this).closest('tr').find('.save').removeClass('save');
     });
   }
+
+  // function saveUpdate(){
+    
+  // }
+
+  // function cancelUpdate(){
+  // }
 
 $(document).ready(function(){
 
@@ -134,10 +156,6 @@ $(document).ready(function(){
       }
     );
   });
-
-
-//--------------------------- UPDATE TRANSACTION DATA
-
 
 //---------------------------- user logout
 

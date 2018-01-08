@@ -38,7 +38,7 @@ module.exports = function(app){
       req.body,
       {
         where: {
-          id: req.body.id
+          id: req.body.id,
         }
       }).then(function(dbTransaction) {
         res.json(dbTransaction);
