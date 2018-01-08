@@ -28,6 +28,7 @@ $(document).ready(function() {
     }).done(function(msg){
       console.log(msg);
       if(msg.auth === true){
+//ref:https://stackoverflow.com/questions/4744751/how-do-i-redirect-with-javascript
         window.location = "/transactions?userId="+msg.userId; // this will redirect to transactions.html
       } else {
         alert("invalid username/password");

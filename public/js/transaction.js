@@ -1,5 +1,6 @@
 var userId = GetQueryStringParams("userId");
 
+
   function getFirstNameLastName(){
     $.get("/api/users/"+userId, function(data){
       console.log(data);
@@ -18,6 +19,8 @@ var userId = GetQueryStringParams("userId");
       renderTransacList(rowsToAdd);
     });
   }
+
+//ref:https://stackoverflow.com/questions/7196238/populate-html-table-with-jquery  
   function renderTransacList(rows){ //this will render all the transactions of a user
     //console.log(rows[0]);
     $( ".lTransac" ).remove();
@@ -32,6 +35,9 @@ var userId = GetQueryStringParams("userId");
     }
     addDeleteEvent();
   }
+
+//ref: *** http://www.jquerybyexample.net/2012/05/how-to-get-querystring-value-using.html
+//https://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
 
   function GetQueryStringParams(sParam){ // this is to extract the userId from the query parameter
     var sPageURL = window.location.search.substring(1);
