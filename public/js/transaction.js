@@ -67,16 +67,19 @@ var userId = GetQueryStringParams("userId");
       // console.log("test");
       var rowId = $(this).parent("td").parent("tr").attr('id');
       console.log(rowId);
-      $(this).closest("tr").remove();
+      $(this).closest("tr").remove();  //------------- CHECK OUT THIS LINE STIL WORKS!!!! this removes the row when delete is clicked
       $.ajax({
         method:"DELETE",
         url:"/api/transactions/" + rowId
-      }) .done(getTransactions());
+      }).done(getTransactions());
     });
   }
 
 
 //ref: https://stackoverflow.com/questions/22745903/enable-disable-controls-in-a-table-row
+
+// whenever I separate the saveUpdate and cancel update into different functions 
+// gets called many times
   function addEditEvent(){
     $(".table-striped").on("click", ".edit", function(){
       event.preventDefault();
@@ -100,20 +103,10 @@ var userId = GetQueryStringParams("userId");
         url:"/api/transactions",
         data:
         {
-        // provider:$("#providerInput").val().trim(),
-        // description:$("#descriptionInput").val().trim(),
-        // amount:$("#amountInput").val().trim(),
         id:saveInstanceId,
         status:$(".edit_Input").val().trim()
-        // UserId:userId
-      }
-
-
+        }
       }).done();
-    });
-    
-    // cancelUpdate();
-    $(".table-striped").on("click", ".cancel", function(){
       $(this).closest('tr').find('.edit_Input').prop('disabled', true);
       $(this).closest('tr').find('.cancel').html('Delete');
       $(this).closest('tr').find('.cancel').addClass('delete');
@@ -123,14 +116,19 @@ var userId = GetQueryStringParams("userId");
       $(this).closest('tr').find('.save').addClass('edit');
       $(this).closest('tr').find('.save').removeClass('save');
     });
+    // cancelUpdate
+     $(".table-striped").on("click", ".cancel", function(){
+      $(this).closest('tr').find('.edit_Input').prop('disabled', true);
+      $(this).closest('tr').find('.cancel').html('Delete');
+      $(this).closest('tr').find('.cancel').addClass('delete');
+      $(this).closest('tr').find('.cancel').removeClass('cancel');
+
+      $(this).closest('tr').find('.save').html('Edit');
+      $(this).closest('tr').find('.save').addClass('edit');
+      $(this).closest('tr').find('.save').removeClass('save');
+      getTransactions();
+    });
   }
-
-  // function saveUpdate(){
-    
-  // }
-
-  // function cancelUpdate(){
-  // }
 
 $(document).ready(function(){
 
@@ -162,7 +160,7 @@ $(document).ready(function(){
   $("#LogOut").on("click", function(event){
     event.preventDefault();
     window.location = "/";
-  })
+  });
 
 });
 

@@ -34,5 +34,13 @@ module.exports = function(app){
 			}
 			res.json(claimsyUser);
 		})
-	})
+	});
+
+//below code is to create a new user for registration page
+	app.post("/api/new/user", function(req, res){
+		db.User.create(req.body).then(function(dbUser){
+			res.json(dbUser);
+		});
+	});
+
 }
