@@ -45,4 +45,15 @@ module.exports = function(app){
       });
   });
 
+//----------- show deductibles
+  app.get("/api/dedux/:id", function(req,res){
+    db.User.findOne({
+      where:{
+        id:req.params.id
+      }
+    }).then(function(dbUser){
+      res.json(dbUser);
+    });
+  });
+
 };

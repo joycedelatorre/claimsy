@@ -130,6 +130,13 @@ var userId = GetQueryStringParams("userId");
     });
   }
 
+  function getDeductible(){
+    $.get("/api/dedux/"+userId, function(data){
+      console.log(data);
+      $("#dedux").html("My Deductible: " + data.deductible);
+    });
+  }
+
 $(document).ready(function(){
 
   getFirstNameLastName();
@@ -153,6 +160,13 @@ $(document).ready(function(){
         UserId:userId
       }
     );
+  });
+
+
+//-------- display my deductibles
+   $("#myDedux").on("click", function(event){
+    event.preventDefault();
+    getDeductible();
   });
 
 //---------------------------- user logout

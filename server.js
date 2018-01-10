@@ -6,7 +6,11 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+// var passport = require('passport'); //&&&&&&&&&&& this is for passport ("&")
+// var bcrypt = require('bcrypt'); //&&&&&&&&&&&&
 
+// const saltRounds = 10; //&&&&&&&&&&
+// 	bcrypt.hash(password, saltRounds, function(err, hash)) //&&&
 // Sets up the Express App
 // =============================================================
 var app = express();
